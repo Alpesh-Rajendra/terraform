@@ -1,7 +1,7 @@
 resource "aws_vpc" "vnet" {
   cidr_block = "192.168.0.0/16"
   tags = {
-    Name = "vpc-ondec-b31"
+    Name = "vpc-ondec"
   }
 }
 
@@ -19,7 +19,7 @@ resource "aws_subnet" "pub" {
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.vnet.id
   tags = {
-    Name = "igw-vpc-oncdec-b31"
+    Name = "igw-vpc-oncdec"
   }
 }
 
@@ -42,7 +42,7 @@ resource "aws_route_table_association" "rsa" {
 
 
 resource "aws_security_group" "sg" {
-  name   = "firewall-vpc-b31"
+  name   = "firewall-vpc"
   vpc_id = aws_vpc.vnet.id
 
   ingress {
@@ -70,9 +70,9 @@ resource "aws_security_group" "sg" {
 
 
 resource "aws_instance" "vm" {
-  ami                    = "ami-05f071c65e32875a8"
+  ami                    = "ami_ID"
   instance_type          = "t3.micro"
-  key_name               = "pankaj"
+  key_name               = "Key_Name"
   subnet_id              = aws_subnet.pub.id
   vpc_security_group_ids = [aws_security_group.sg.id]
   user_data              = <<-EOF
@@ -80,7 +80,7 @@ resource "aws_instance" "vm" {
      sudo -i
      yum install httpd -y
      systemctl start httpd
-     echo "Hello Terraform Happpy New Year" > /var/www/html/index.html
+     echo "Hello Terraform" > /var/www/html/index.html
     EOF
   tags = {
     Name = "TF-Server"
