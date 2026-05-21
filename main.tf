@@ -8,7 +8,7 @@ resource "aws_vpc" "vnet" {
 resource "aws_subnet" "pub" {
   vpc_id                  = aws_vpc.vnet.id
   cidr_block              = "192.168.0.0/20"
-  availability_zone       = "ap-southeast-1a"
+  availability_zone       = "ap-southeast-2a"
   map_public_ip_on_launch = true
   tags = {
     Name = "public-subnet"
