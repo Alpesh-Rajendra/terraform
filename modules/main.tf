@@ -2,7 +2,7 @@ module "vpc" {
   source            = "./modules/vpc"
   vpc_cidr_block    = "192.168.0.0/16"
   subnet_cidr_block = "192.168.0.0/23"
-  az                = "ap-southeast-1a"
+  az                = "YourAZ"
   public_ip         = true
 }
 
